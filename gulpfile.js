@@ -1,7 +1,6 @@
 var gulp = require('gulp');
 var sass = require('gulp-sass');
 var concat = require('gulp-concat');
-var mustache = require('gulp-mustache');
 var fs = require('fs');
 var babel = require('gulp-babel');
 var python = require('python-shell');
@@ -34,15 +33,7 @@ gulp.task('es6:watch', function() {
 });
 
 gulp.task('html', function() {
-	var templateData = {};
-	templateData.style = !!fs.existsSync('./dist/scripts/main.js');
-	templateData.script = !!fs.existsSync('./dist/styles/main.css');
-	if (!templateData.script && !templateData.style) {
-		templateData.message = "It worked! Now get to coding!";
-	}
-
 	return gulp.src('./src/index.html')
-		.pipe(mustache(templateData))
 		.pipe(gulp.dest('dist'));
 });
 
